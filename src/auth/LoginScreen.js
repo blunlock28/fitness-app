@@ -1,6 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { AuthContext } from './AuthContext';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email('Email inválido').required('Requerido'),
+  password: Yup.string().min(6, 'Mínimo 6 caracteres').required('Requerido')
+});
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
